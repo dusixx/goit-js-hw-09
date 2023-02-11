@@ -5,10 +5,12 @@ const startBtn = document.querySelector('[data-start]');
 const stopBtn = document.querySelector('[data-stop]');
 let timerId;
 
+stopBtn.disabled = true;
+
 startBtn.addEventListener('click', onStartButton);
 
-stopBtn.addEventListener('click', () => {
-  startBtn.disabled = false;
+stopBtn.addEventListener('click', ({ currentTarget: btn }) => {
+  btn.disabled = !(startBtn.disabled = false);
   clearInterval(timerId);
 
   // возвращаем дефолтный цвет
@@ -16,6 +18,6 @@ stopBtn.addEventListener('click', () => {
 });
 
 function onStartButton({ currentTarget: btn }) {
-  btn.disabled = true;
+  btn.disabled = !(stopBtn.disabled = false);
   timerId = setInterval(() => utils.setBodyBgColor(), TIMER_PERIOD);
 }
