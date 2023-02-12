@@ -50,8 +50,8 @@ function onStartClick({ currentTarget: btn }) {
 
     // отсчет закончен
     if (dateDiff < TIMER_PERIOD) {
-      // включаем кнопку и поле
-      dateInput.disabled = btn.disabled = false;
+      // включаем поле
+      dateInput.disabled = false;
       clearInterval(timerId);
       Notify.success('Bingo!');
     }
