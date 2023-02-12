@@ -48,7 +48,7 @@ function onStartClick({ currentTarget: btn }) {
     const dateDiff = Date.parse(dateText.value) - Date.now();
 
     // обновляем значения таймера на странице
-    updateTimerValues(dateDiff);
+    updateTimerValues(dateDiff, valueRefs);
 
     // отсчет закончен
     if (dateDiff < TIMER_PERIOD) {
@@ -62,12 +62,12 @@ function onStartClick({ currentTarget: btn }) {
 /**
  * Обновляет значения таймера на странице
  */
-function updateTimerValues(dateDiff) {
+function updateTimerValues(dateDiff, refs) {
   const timeData = utils.convertMs(dateDiff);
 
-  for (const [key, value] of Object.entries(timeData)) {
-    valueRefs[key].textContent = utils.addLeadingZero(value);
-  }
+  Object.entries(timeData).forEach(([key, value]) => {
+    refs[key].textContent = utils.addLeadingZero(value);
+  });
 }
 
 /**
