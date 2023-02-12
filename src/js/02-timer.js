@@ -5,7 +5,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const TIMER_PERIOD = 1000;
 const ERR_INVALID_DATE = 'Please choose a date in the future';
-const MSG_TIMESUP = 'Done!';
+const MSG_TIMESUP = 'Time is up!';
 
 const startBtn = document.querySelector('[data-start]');
 const dateInput = document.querySelector('#datetime-picker');
@@ -54,7 +54,6 @@ function onStartClick({ currentTarget: btn }) {
 function onTimerTick() {
   const dateDiff = Date.parse(dateInput.value) - Date.now();
 
-  // перерисовываем значения таймера
   renderTimerValues(dateDiff, valueRefs);
 
   // отсчет закончен
