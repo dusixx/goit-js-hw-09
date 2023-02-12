@@ -23,11 +23,9 @@ flatpickr('#datetime-picker', {
 });
 
 function onDatePickerClose(selectedDates) {
-  const date = selectedDates[0];
-  const isValidDate = date - Date.now() > 0;
+  const isValidDate = selectedDates[0] - Date.now() > 0;
 
   startBtn.disabled = !isValidDate;
-
   if (!isValidDate) Notify.failure('Please choose a date in the future');
 }
 
