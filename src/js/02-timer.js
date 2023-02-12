@@ -6,7 +6,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 const TIMER_PERIOD = 1000;
 const startBtn = document.querySelector('[data-start]');
 const dateInput = document.querySelector('#datetime-picker');
-const valueRefs = getTimerValueRefs();
+const valueRefs = getTimerValueRefs('.timer > .field');
 let timerId;
 
 startBtn.disabled = true;
@@ -75,12 +75,17 @@ function updateTimerValues(ms, valueRefs) {
 }
 
 /**
- * Вернет объект, где ключ - это имя dataset атрибута,
- * а значение - ссылка на соотвествующий span.value элемент
+ * Вернет объект, где ключ - это label поля,
+ * а значение - ссылка на соотвествующий value элемент
  */
-function getTimerValueRefs() {
-  return ['days', 'hours', 'minutes', 'seconds'].reduce((res, attr) => {
-    res[attr] = document.querySelector(`.value[data-${attr}]`);
-    return res;
-  }, {});
+function getTimerValueRefs(fieldSelector) {
+  const res = {};
+  document
+    .querySelectorAll(fieldSelector)
+    ?.forEach(
+      ({ firstElementChild: value, lastElementChild: label }) =>
+        (res[label.textContent.toLowerCase()] = value)
+    );
+
+  return res;
 }
