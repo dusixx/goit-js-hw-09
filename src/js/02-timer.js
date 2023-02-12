@@ -1,19 +1,20 @@
 import utils from './utils';
+import { Notify } from 'notiflix';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import { Notify } from 'notiflix';
 
 const TIMER_PERIOD = 1000;
 const startBtn = document.querySelector('[data-start]');
 const dateInput = document.querySelector('#datetime-picker');
 const valueRefs = getTimerValueRefs();
+let timerId;
 
 startBtn.disabled = true;
 startBtn.addEventListener('click', onStartClick);
 
-//
-// Инициализируем flatpickr
-//
+/**
+ * Инициализируем flatpickr
+ */
 flatpickr('#datetime-picker', {
   enableTime: true,
   time_24hr: true,
@@ -26,7 +27,7 @@ flatpickr('#datetime-picker', {
  * Вызывается после закрытия окна выбора даты
  */
 function onDatePickerClose(selectedDates) {
-  const isValidDate = selectedDates[0] - Date.now() > 0;
+  const isValidDate = selectedDates[0] > Date.now();
 
   startBtn.disabled = !isValidDate;
   if (!isValidDate) Notify.failure('Please choose a date in the future');
@@ -41,29 +42,29 @@ function onStartClick({ currentTarget: btn }) {
 
   // обновляем разметку и запускаем таймер
   onTimerTick();
-  const timerId = setInterval(onTimerTick, TIMER_PERIOD);
+  timerId = setInterval(onTimerTick, TIMER_PERIOD);
+}
 
-  /**
-   * Вызывается по тику таймера
-   */
-  function onTimerTick() {
-    const dateDiff = Date.parse(dateInput.value) - Date.now();
+/**
+ * Вызывается по тику таймера
+ */
+function onTimerTick() {
+  const dateDiff = Date.parse(dateInput.value) - Date.now();
 
-    // обновляем значения таймера на странице
-    updateTimerValues(dateDiff, valueRefs);
+  // обновляем значения таймера
+  updateTimerValues(dateDiff, valueRefs);
 
-    // отсчет закончен
-    if (dateDiff < TIMER_PERIOD) {
-      // включаем поле, но не кнопку
-      dateInput.disabled = false;
-      clearInterval(timerId);
-      Notify.success('Done!');
-    }
+  // отсчет закончен
+  if (dateDiff <= TIMER_PERIOD) {
+    // включаем поле, но не кнопку
+    dateInput.disabled = false;
+    clearInterval(timerId);
+    Notify.success('Done!');
   }
 }
 
 /**
- * Обновляет значения таймера в браузере
+ * Обновляет значения полей таймера в разметке
  */
 function updateTimerValues(ms, valueRefs) {
   const timeData = utils.convertMs(ms);
@@ -79,7 +80,7 @@ function updateTimerValues(ms, valueRefs) {
  */
 function getTimerValueRefs() {
   return ['days', 'hours', 'minutes', 'seconds'].reduce((res, attr) => {
-    res[attr] = document.querySelector(`[data-${attr}]`);
+    res[attr] = document.querySelector(`.value[data-${attr}]`);
     return res;
   }, {});
 }
