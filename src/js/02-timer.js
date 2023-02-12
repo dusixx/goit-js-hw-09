@@ -67,7 +67,7 @@ function onTimerTick() {
 }
 
 /**
- * Обновляет значения полей таймера в разметке
+ * Перерисовывает значения полей таймера
  */
 function renderTimerValues(ms, valueRefs) {
   const timeData = utils.convertMs(ms);
@@ -78,8 +78,8 @@ function renderTimerValues(ms, valueRefs) {
 }
 
 /**
- * Вернет объект, где ключ - это label поля,
- * а значение - ссылка на соотвествующий value элемент
+ * Вернет объект, где ключ - это имя поля,
+ * а значение - ссылка на соотвествующий value
  */
 function getTimerValueRefs(fieldSelector) {
   const res = {};
