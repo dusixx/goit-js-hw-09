@@ -4,8 +4,6 @@ import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix';
 
 const TIMER_PERIOD = 1000;
-const ERR_INVALID_DATE = 'Please choose a date in the future';
-
 const start = document.querySelector('[data-start]');
 const dateText = document.querySelector('#datetime-picker');
 const valueRefs = getTimerValueRefs();
@@ -30,7 +28,7 @@ function onDatePickerClose(selectedDates) {
 
   start.disabled = !isValidDate;
 
-  if (!isValidDate) Notify.failure(ERR_INVALID_DATE);
+  if (!isValidDate) Notify.failure('Please choose a date in the future');
 }
 
 function onStartClick({ currentTarget: btn }) {
@@ -42,7 +40,7 @@ function onStartClick({ currentTarget: btn }) {
   const timerId = setInterval(onTimerTick, TIMER_PERIOD);
 
   /**
-   * Вызывается по тику таймера с заданной периодичностью
+   * Вызывается по тику таймера
    */
   function onTimerTick() {
     const dateDiff = Date.parse(dateText.value) - Date.now();
@@ -55,12 +53,13 @@ function onStartClick({ currentTarget: btn }) {
       // включаем кнопку и поле
       dateText.disabled = btn.disabled = false;
       clearInterval(timerId);
+      Notify.success('Bingo!');
     }
   }
 }
 
 /**
- * Обновляет значения таймера на странице
+ * Обновляет значения таймера в браузере
  */
 function updateTimerValues(dateDiff, refs) {
   const timeData = utils.convertMs(dateDiff);
