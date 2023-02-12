@@ -7,7 +7,7 @@ let timerId;
 
 stopBtn.disabled = true;
 
-startBtn.addEventListener('click', onStartButton);
+startBtn.addEventListener('click', onStartClick);
 
 stopBtn.addEventListener('click', ({ currentTarget: btn }) => {
   // отключаем stopBtn, включаем startBtn
@@ -18,7 +18,7 @@ stopBtn.addEventListener('click', ({ currentTarget: btn }) => {
   utils.setBodyBgColor(null);
 });
 
-function onStartButton({ currentTarget: btn }) {
+function onStartClick({ currentTarget: btn }) {
   // отключаем startBtn, включаем stopBtn
   btn.disabled = !(stopBtn.disabled = false);
   timerId = setInterval(() => utils.setBodyBgColor(), TIMER_PERIOD);
