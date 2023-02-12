@@ -51,8 +51,8 @@ function onStartClick({ currentTarget: btn }) {
 function onTimerTick() {
   const dateDiff = Date.parse(dateInput.value) - Date.now();
 
-  // обновляем значения таймера
-  updateTimerValues(dateDiff, valueRefs);
+  // перерисовываем значения таймера
+  renderTimerValues(dateDiff, valueRefs);
 
   // отсчет закончен
   if (dateDiff <= TIMER_PERIOD) {
@@ -66,7 +66,7 @@ function onTimerTick() {
 /**
  * Обновляет значения полей таймера в разметке
  */
-function updateTimerValues(ms, valueRefs) {
+function renderTimerValues(ms, valueRefs) {
   const timeData = utils.convertMs(ms);
 
   Object.entries(timeData).forEach(([key, value]) => {
