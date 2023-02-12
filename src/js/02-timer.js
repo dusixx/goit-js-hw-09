@@ -4,6 +4,9 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 const TIMER_PERIOD = 1000;
+const ERR_INVALID_DATE = 'Please choose a date in the future';
+const MSG_TIMESUP = 'Done!';
+
 const startBtn = document.querySelector('[data-start]');
 const dateInput = document.querySelector('#datetime-picker');
 const valueRefs = getTimerValueRefs('.timer > .field');
@@ -30,7 +33,7 @@ function onDatePickerClose(selectedDates) {
   const isValidDate = selectedDates[0] > Date.now();
 
   startBtn.disabled = !isValidDate;
-  if (!isValidDate) Notify.failure('Please choose a date in the future');
+  if (!isValidDate) Notify.failure(ERR_INVALID_DATE);
 }
 
 /**
@@ -59,7 +62,7 @@ function onTimerTick() {
     // включаем поле, но не кнопку
     dateInput.disabled = false;
     clearInterval(timerId);
-    Notify.success('Done!');
+    Notify.success(MSG_TIMESUP);
   }
 }
 
