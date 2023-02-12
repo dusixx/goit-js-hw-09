@@ -9,9 +9,9 @@ export default {
     return typeof v !== 'undefined';
   },
 
-  isNum(v) {
-    return typeof v === 'number' && !isNaN(v) && isFinite(v);
-  },
+  //   isNum(v) {
+  //     return typeof v === 'number' && !isNaN(v) && isFinite(v);
+  //   },
 
   setBodyBgColor(color) {
     if (!this.isDef(color)) color = this.getRandomHexColor();
@@ -33,6 +33,6 @@ export default {
   },
 
   addLeadingZero(v) {
-    if (this.isNum(v)) return String(v).padStart(2, '0');
+    return String(v).padStart(2, '0');
   },
 };

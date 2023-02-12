@@ -22,6 +22,9 @@ flatpickr('#datetime-picker', {
   onClose: onDatePickerClose,
 });
 
+/**
+ * Вызывается после закрытия окна выбора даты
+ */
 function onDatePickerClose(selectedDates) {
   const isValidDate = selectedDates[0] - Date.now() > 0;
 
@@ -29,6 +32,9 @@ function onDatePickerClose(selectedDates) {
   if (!isValidDate) Notify.failure('Please choose a date in the future');
 }
 
+/**
+ * Вызывается по нажатию на Start
+ */
 function onStartClick({ currentTarget: btn }) {
   // отключаем кнопку и поле
   dateInput.disabled = btn.disabled = true;
@@ -58,7 +64,6 @@ function onStartClick({ currentTarget: btn }) {
 
 /**
  * Обновляет значения таймера в браузере
- * valueRefs - объект со ссылками на span.value таймера
  */
 function updateTimerValues(ms, valueRefs) {
   const timeData = utils.convertMs(ms);
