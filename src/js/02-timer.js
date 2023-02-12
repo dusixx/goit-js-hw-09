@@ -53,19 +53,20 @@ function onStartClick({ currentTarget: btn }) {
       // включаем поле, но не кнопку
       dateInput.disabled = false;
       clearInterval(timerId);
-      Notify.success('Bingo!');
+      Notify.success('Done!');
     }
   }
 }
 
 /**
  * Обновляет значения таймера в браузере
+ * valueRefs - объект со ссылками на span.value таймера
  */
-function updateTimerValues(dateDiff, refs) {
-  const timeData = utils.convertMs(dateDiff);
+function updateTimerValues(ms, valueRefs) {
+  const timeData = utils.convertMs(ms);
 
   Object.entries(timeData).forEach(([key, value]) => {
-    refs[key].textContent = utils.addLeadingZero(value);
+    valueRefs[key].textContent = utils.addLeadingZero(value);
   });
 }
 
