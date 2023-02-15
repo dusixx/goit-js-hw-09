@@ -14,6 +14,7 @@ export default {
   //   },
 
   setBodyBgColor(color) {
+    // если color не задан - ставим рандомный
     if (!this.isDef(color)) color = this.getRandomHexColor();
     document.body.style.backgroundColor = color;
   },

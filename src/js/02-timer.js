@@ -10,7 +10,9 @@ const MSG_TIMESUP = 'Time is up!';
 const startBtn = document.querySelector('[data-start]');
 const dateInput = document.querySelector('#datetime-picker');
 const valueRefs = getTimerValueRefs('.timer > .field');
+
 let timerId;
+let countdownInterval;
 
 startBtn.disabled = true;
 startBtn.addEventListener('click', onStartClick);
@@ -33,7 +35,8 @@ function onDatePickerClose(selectedDates) {
   const isValidDate = selectedDates[0] > Date.now();
 
   startBtn.disabled = !isValidDate;
-  if (!isValidDate) Notify.failure(ERR_INVALID_DATE);
+  if (!isValidDate) return Notify.failure(ERR_INVALID_DATE);
+  countdownInterval = selectedDates[0] - Date.now();
 }
 
 /**
@@ -52,12 +55,10 @@ function onStartClick({ currentTarget: btn }) {
  * Вызывается по тику таймера
  */
 function onTimerTick() {
-  const dateDiff = Date.parse(dateInput.value) - Date.now();
-
-  renderTimerValues(dateDiff, valueRefs);
+  renderTimerValues((countdownInterval -= TIMER_PERIOD), valueRefs);
 
   // отсчет закончен
-  if (dateDiff <= TIMER_PERIOD) {
+  if (countdownInterval <= TIMER_PERIOD) {
     // включаем поле, но не кнопку
     dateInput.disabled = false;
     clearInterval(timerId);
