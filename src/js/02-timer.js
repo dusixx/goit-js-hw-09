@@ -32,10 +32,11 @@ flatpickr('#datetime-picker', {
  * Вызывается после закрытия окна выбора даты
  */
 function onDatePickerClose(selectedDates) {
-  const isValidDate = selectedDates[0] > Date.now();
+  const isInvalidDate = selectedDates[0] <= Date.now();
 
-  startBtn.disabled = !isValidDate;
-  if (!isValidDate) return Notify.failure(ERR_INVALID_DATE);
+  startBtn.disabled = isInvalidDate;
+  if (isInvalidDate) return Notify.failure(ERR_INVALID_DATE);
+
   countdownInterval = selectedDates[0] - Date.now();
 }
 
