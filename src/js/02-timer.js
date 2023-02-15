@@ -4,7 +4,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 const TIMER_PERIOD = 1000;
-const ERR_INVALID_DATE = 'Please choose a date in the future';
+const ERR_INVALID_DATE = 'Please, choose a date in the future!';
 const MSG_TIMESUP = 'Time is up!';
 
 const startBtn = document.querySelector('[data-start]');
