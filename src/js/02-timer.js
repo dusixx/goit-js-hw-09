@@ -17,9 +17,6 @@ let countdownInterval;
 startBtn.disabled = true;
 startBtn.addEventListener('click', onStartClick);
 
-/**
- * Инициализируем flatpickr
- */
 flatpickr('#datetime-picker', {
   enableTime: true,
   time_24hr: true,
@@ -34,9 +31,6 @@ flatpickr('#datetime-picker', {
   },
 });
 
-/**
- * Вызывается по нажатию на Start
- */
 function onStartClick({ currentTarget: btn }) {
   // отключаем кнопку и поле
   dateInput.disabled = btn.disabled = true;
@@ -46,9 +40,6 @@ function onStartClick({ currentTarget: btn }) {
   timerId = setInterval(onTimerTick, TIMER_PERIOD);
 }
 
-/**
- * Вызывается по тику таймера
- */
 function onTimerTick() {
   renderTimerValues((countdownInterval -= TIMER_PERIOD), valueRefs);
 
@@ -61,9 +52,6 @@ function onTimerTick() {
   }
 }
 
-/**
- * Перерисовывает значения полей таймера
- */
 function renderTimerValues(ms, valueRefs) {
   const timeData = utils.convertMs(ms);
 
@@ -72,10 +60,6 @@ function renderTimerValues(ms, valueRefs) {
   });
 }
 
-/**
- * Вернет объект, где ключ - это имя поля,
- * а значение - ссылка на соотвествующий value
- */
 function getTimerValueRefs(fieldSelector) {
   const res = {};
   document
