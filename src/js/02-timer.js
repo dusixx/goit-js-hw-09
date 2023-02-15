@@ -23,7 +23,7 @@ startBtn.addEventListener('click', onStartClick);
 flatpickr('#datetime-picker', {
   enableTime: true,
   time_24hr: true,
-  defaultDate: new Date(),
+  defaultDate: Date.now(),
   minuteIncrement: 1,
 
   onClose: selDates => {

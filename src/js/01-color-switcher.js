@@ -24,5 +24,5 @@ function onStopClick({ currentTarget: btn }) {
   btn.disabled = !(startBtn.disabled = false);
   clearInterval(timerId);
   // возвращаем дефолтный цвет
-  utils.setBodyBgColor(null);
+  // utils.setBodyBgColor(null);
 }
