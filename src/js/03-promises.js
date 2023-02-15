@@ -1,6 +1,7 @@
 import { Notify } from 'notiflix';
 
 const form = document.querySelector('.form');
+const notifyOpts = { timeout: 1000 };
 
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -11,9 +12,9 @@ form.addEventListener('submit', e => {
   Array.from({ length: amount.value }, (_, pos) => {
     createPromise(pos + 1, pause).then(
       ({ pos, delay }) =>
-        Notify.success(`Fulfilled promise #${pos} in ${delay}ms`),
+        Notify.success(`Fulfilled promise #${pos} in ${delay}ms`, notifyOpts),
       ({ pos, delay }) =>
-        Notify.failure(`Rejected promise #${pos} in ${delay}ms`)
+        Notify.failure(`Rejected promise #${pos} in ${delay}ms`, notifyOpts)
     );
 
     pause += Number(step.value);
