@@ -25,18 +25,14 @@ flatpickr('#datetime-picker', {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose: onDatePickerClose,
+
+  onClose: selDates => {
+    countdownInterval = selDates[0] - Date.now();
+
+    if ((startBtn.disabled = countdownInterval <= 0))
+      Notify.failure(ERR_INVALID_DATE);
+  },
 });
-
-/**
- * Вызывается после закрытия окна выбора даты
- */
-function onDatePickerClose(selectedDates) {
-  countdownInterval = selectedDates[0] - Date.now();
-
-  if ((startBtn.disabled = countdownInterval <= 0))
-    Notify.failure(ERR_INVALID_DATE);
-}
 
 /**
  * Вызывается по нажатию на Start
