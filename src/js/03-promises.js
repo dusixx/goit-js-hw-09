@@ -1,7 +1,6 @@
-import { Notify } from 'notiflix';
+import utils from './utils';
 
 const form = document.querySelector('.form');
-const notifyOpts = { timeout: 1000 };
 
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -12,9 +11,9 @@ form.addEventListener('submit', e => {
   Array.from({ length: amount.value }, (_, pos) => {
     createPromise(pos + 1, pause).then(
       ({ pos, delay }) =>
-        Notify.success(`Fulfilled promise #${pos} in ${delay}ms`, notifyOpts),
+        utils.success(`Fulfilled promise #${pos} in ${delay}ms`, 1000),
       ({ pos, delay }) =>
-        Notify.failure(`Rejected promise #${pos} in ${delay}ms`, notifyOpts)
+        utils.error(`Rejected promise #${pos} in ${delay}ms`, 1000)
     );
 
     pause += Number(step.value);
@@ -22,7 +21,7 @@ form.addEventListener('submit', e => {
 });
 
 form.addEventListener('input', ({ target: el }) => {
-  if (el.tagName === 'INPUT') return;
+  if (el.tagName !== 'INPUT') return;
   if (el.value < 0) el.value = 0;
 });
 

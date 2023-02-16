@@ -1,3 +1,5 @@
+import { Notify } from 'notiflix';
+
 export default {
   getRandomHexColor() {
     return `#${Math.floor(Math.random() * 16777215)
@@ -35,5 +37,13 @@ export default {
 
   addLeadingZero(v) {
     return String(v).padStart(2, '0');
+  },
+
+  error(msg, timeout) {
+    Notify.failure(msg, { timeout });
+  },
+
+  success(msg, timeout) {
+    Notify.success(msg, { timeout });
   },
 };

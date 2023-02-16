@@ -1,5 +1,4 @@
 import utils from './utils';
-import { Notify } from 'notiflix';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
@@ -24,7 +23,7 @@ flatpickr('#datetime-picker', {
     countdownInterval = selDates[0] - Date.now();
 
     if ((startBtn.disabled = countdownInterval <= 0))
-      Notify.failure('Please, choose a date in the future!', { timeout: 1000 });
+      utils.error('Please, choose a date in the future!', 1000);
   },
 });
 
@@ -40,7 +39,7 @@ function onTimerTick() {
   if (countdownInterval <= TIMER_PERIOD) {
     dateInput.disabled = false;
     clearInterval(timerId);
-    Notify.success('Time is up!', { timeout: 1000 });
+    utils.success('Time is up!', 1000);
   }
 }
 
