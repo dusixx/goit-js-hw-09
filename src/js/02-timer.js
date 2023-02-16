@@ -21,7 +21,6 @@ flatpickr('#datetime-picker', {
 
   onClose: (selDates, dateStr, instance) => {
     if (!dateStr) return instance.setDate(Date.now());
-
     countdownInterval = selDates[0] - Date.now();
 
     if ((startBtn.disabled = countdownInterval <= 0))
