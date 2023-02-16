@@ -21,7 +21,7 @@ form.addEventListener('submit', e => {
 });
 
 form.addEventListener('input', ({ target: el }) => {
-  if (el.tagName === 'INPUT' && e.value < 0) el.value = 0;
+  if (el.tagName === 'INPUT' && el.value < 0) el.value = 0;
 });
 
 function createPromise(pos, delay) {
