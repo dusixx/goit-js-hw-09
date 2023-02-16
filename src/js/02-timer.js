@@ -20,7 +20,7 @@ flatpickr('#datetime-picker', {
   minuteIncrement: 1,
 
   onClose: selDates => {
-    countdownInterval = (selDates[0] || 0) - Date.now();
+    countdownInterval = selDates[0] - Date.now() || 0;
 
     if ((startBtn.disabled = countdownInterval <= 0))
       utils.error('Please, choose a date in the future!', 1000);
