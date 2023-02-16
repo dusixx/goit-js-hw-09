@@ -2,6 +2,10 @@ import utils from './utils';
 
 const form = document.querySelector('.form');
 
+form.addEventListener('input', ({ target: el }) => {
+  if (el.tagName === 'INPUT' && el.value < 0) el.value = 0;
+});
+
 form.addEventListener('submit', e => {
   e.preventDefault();
 
@@ -18,10 +22,6 @@ form.addEventListener('submit', e => {
 
     pause += Number(step.value);
   });
-});
-
-form.addEventListener('input', ({ target: el }) => {
-  if (el.tagName === 'INPUT' && el.value < 0) el.value = 0;
 });
 
 function createPromise(pos, delay) {
