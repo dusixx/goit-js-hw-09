@@ -10,7 +10,6 @@ const MSG_TIMESUP = 'Time is up!';
 const startBtn = document.querySelector('[data-start]');
 const dateInput = document.querySelector('#datetime-picker');
 const valueRefs = getTimerValueRefs('.timer > .field');
-const notifyOpts = { timeout: 1000 };
 
 let timerId;
 let countdownInterval;
@@ -28,15 +27,12 @@ flatpickr('#datetime-picker', {
     countdownInterval = selDates[0] - Date.now();
 
     if ((startBtn.disabled = countdownInterval <= 0))
-      Notify.failure(ERR_INVALID_DATE, notifyOpts);
+      Notify.failure(ERR_INVALID_DATE, { timeout: 1000 });
   },
 });
 
 function onStartClick({ currentTarget: btn }) {
-  // отключаем кнопку и поле
   dateInput.disabled = btn.disabled = true;
-
-  // обновляем разметку и запускаем таймер
   onTimerTick();
   timerId = setInterval(onTimerTick, TIMER_PERIOD);
 }
@@ -44,12 +40,10 @@ function onStartClick({ currentTarget: btn }) {
 function onTimerTick() {
   renderTimerValues((countdownInterval -= TIMER_PERIOD), valueRefs);
 
-  // отсчет закончен
   if (countdownInterval <= TIMER_PERIOD) {
-    // включаем поле, но не кнопку
     dateInput.disabled = false;
     clearInterval(timerId);
-    Notify.success(MSG_TIMESUP, notifyOpts);
+    Notify.success(MSG_TIMESUP, { timeout: 1000 });
   }
 }
 
