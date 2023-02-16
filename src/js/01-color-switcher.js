@@ -7,12 +7,12 @@ let timerId;
 
 stopBtn.disabled = true;
 
-startBtn.addEventListener('click', ({ currentTarget: btn }) => {
-  btn.disabled = !(stopBtn.disabled = false);
+startBtn.addEventListener('click', ({ currentTarget: startBtn }) => {
+  startBtn.disabled = !(stopBtn.disabled = false);
   timerId = setInterval(() => utils.setBodyBgColor(), TIMER_PERIOD);
 });
 
-stopBtn.addEventListener('click', ({ currentTarget: btn }) => {
-  btn.disabled = !(startBtn.disabled = false);
+stopBtn.addEventListener('click', ({ currentTarget: stopBtn }) => {
+  stopBtn.disabled = !(startBtn.disabled = false);
   clearInterval(timerId);
 });
