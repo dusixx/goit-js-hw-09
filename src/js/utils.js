@@ -11,12 +11,7 @@ export default {
     return typeof v !== 'undefined';
   },
 
-  //   isNum(v) {
-  //     return typeof v === 'number' && !isNaN(v) && isFinite(v);
-  //   },
-
   setBodyBgColor(color) {
-    // если color не задан - ставим рандомный
     if (!this.isDef(color)) color = this.getRandomHexColor();
     document.body.style.backgroundColor = color;
   },
