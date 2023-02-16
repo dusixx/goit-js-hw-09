@@ -4,9 +4,6 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 const TIMER_PERIOD = 1000;
-const ERR_INVALID_DATE = 'Please, choose a date in the future!';
-const MSG_TIMESUP = 'Time is up!';
-
 const startBtn = document.querySelector('[data-start]');
 const dateInput = document.querySelector('#datetime-picker');
 const valueRefs = getTimerValueRefs('.timer > .field');
@@ -27,7 +24,7 @@ flatpickr('#datetime-picker', {
     countdownInterval = selDates[0] - Date.now();
 
     if ((startBtn.disabled = countdownInterval <= 0))
-      Notify.failure(ERR_INVALID_DATE, { timeout: 1000 });
+      Notify.failure('Please, choose a date in the future!', { timeout: 1000 });
   },
 });
 
@@ -43,7 +40,7 @@ function onTimerTick() {
   if (countdownInterval <= TIMER_PERIOD) {
     dateInput.disabled = false;
     clearInterval(timerId);
-    Notify.success(MSG_TIMESUP, { timeout: 1000 });
+    Notify.success('Time is up!', { timeout: 1000 });
   }
 }
 
