@@ -5,16 +5,13 @@ const startBtn = document.querySelector('[data-start]');
 const stopBtn = document.querySelector('[data-stop]');
 let timerId;
 
-stopBtn.disabled = true;
-startBtn.addEventListener('click', onStartClick);
-stopBtn.addEventListener('click', onStopClick);
-
-function onStartClick({ currentTarget: btn }) {
+startBtn.addEventListener('click', ({ currentTarget: btn }) => {
   btn.disabled = !(stopBtn.disabled = false);
   timerId = setInterval(() => utils.setBodyBgColor(), TIMER_PERIOD);
-}
+});
 
-function onStopClick({ currentTarget: btn }) {
+stopBtn.disabled = true;
+stopBtn.addEventListener('click', ({ currentTarget: btn }) => {
   btn.disabled = !(startBtn.disabled = false);
   clearInterval(timerId);
-}
+});
