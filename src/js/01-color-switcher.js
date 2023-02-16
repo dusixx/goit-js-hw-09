@@ -9,20 +9,12 @@ stopBtn.disabled = true;
 startBtn.addEventListener('click', onStartClick);
 stopBtn.addEventListener('click', onStopClick);
 
-/* 
-  Обработчики событий
-*/
-
 function onStartClick({ currentTarget: btn }) {
-  // отключаем startBtn, включаем stopBtn
   btn.disabled = !(stopBtn.disabled = false);
   timerId = setInterval(() => utils.setBodyBgColor(), TIMER_PERIOD);
 }
 
 function onStopClick({ currentTarget: btn }) {
-  // отключаем stopBtn, включаем startBtn
   btn.disabled = !(startBtn.disabled = false);
   clearInterval(timerId);
-  // возвращаем дефолтный цвет
-  // utils.setBodyBgColor(null);
 }
