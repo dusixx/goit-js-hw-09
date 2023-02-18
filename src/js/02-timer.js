@@ -45,9 +45,7 @@ function onTimerTick() {
 }
 
 function renderTimerValues(ms, valueRefs) {
-  const timeData = utils.convertMs(ms);
-
-  Object.entries(timeData).forEach(([key, value]) => {
+  Object.entries(utils.convertMs(ms)).forEach(([key, value]) => {
     valueRefs[key].textContent = utils.addLeadingZero(value);
   });
 }
