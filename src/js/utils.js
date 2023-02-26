@@ -34,11 +34,11 @@ export default {
     return String(v).padStart(2, '0');
   },
 
-  error(msg, timeout = 1000) {
+  error(msg, timeout = 1500) {
     Notify.failure(msg, { timeout });
   },
 
-  success(msg, timeout = 1000) {
+  success(msg, timeout = 1500) {
     Notify.success(msg, { timeout });
   },
 };
