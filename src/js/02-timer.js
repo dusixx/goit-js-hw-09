@@ -24,7 +24,7 @@ flatpickr('#datetime-picker', {
     countdownInterval = selDates[0] - Date.now();
 
     if ((startBtn.disabled = countdownInterval <= 0))
-      utils.error('Please, choose a date in the future!', 1000);
+      utils.error('Please, choose a date in the future!');
   },
 });
 
@@ -40,7 +40,7 @@ function onTimerTick() {
   if (countdownInterval <= TIMER_PERIOD) {
     dateInput.disabled = false;
     clearInterval(timerId);
-    utils.success('Time is up!', 1000);
+    utils.success('Time is up!');
   }
 }
 

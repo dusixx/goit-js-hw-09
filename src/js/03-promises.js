@@ -15,9 +15,8 @@ form.addEventListener('submit', e => {
   Array.from({ length: amount.value }, (_, pos) => {
     createPromise(pos + 1, pause).then(
       ({ pos, delay }) =>
-        utils.success(`Fulfilled promise #${pos} in ${delay}ms`, 1000),
-      ({ pos, delay }) =>
-        utils.error(`Rejected promise #${pos} in ${delay}ms`, 1000)
+        utils.success(`Fulfilled promise #${pos} in ${delay}ms`),
+      ({ pos, delay }) => utils.error(`Rejected promise #${pos} in ${delay}ms`)
     );
 
     pause += Number(step.value);
