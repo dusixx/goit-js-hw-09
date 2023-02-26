@@ -18,15 +18,16 @@ flatpickr('#datetime-picker', {
   time_24hr: true,
   defaultDate: Date.now(),
   minuteIncrement: 1,
-
-  onClose: (selDates, dateStr, instance) => {
-    if (!dateStr) return instance.setDate(Date.now());
-    countdownInterval = selDates[0] - Date.now();
-
-    if ((startBtn.disabled = countdownInterval <= 0))
-      utils.error('Please, choose a date in the future!');
-  },
+  onClose: onDatePickerClose,
 });
+
+function onDatePickerClose(selDates, dateStr, instance) {
+  if (!dateStr) return instance.setDate(Date.now());
+  countdownInterval = selDates[0] - Date.now();
+
+  if ((startBtn.disabled = countdownInterval <= 0))
+    utils.error('Please, choose a date in the future!');
+}
 
 function onStartClick({ currentTarget: btn }) {
   dateInput.disabled = btn.disabled = true;
