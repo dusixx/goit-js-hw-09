@@ -10,18 +10,17 @@ formRef.addEventListener('submit', e => {
   e.preventDefault();
 
   const { delay, step, amount } = e.currentTarget;
-  let pause = Number(delay.value);
+  const stp = Number(step.value);
+  let pause = delay.value - stp;
 
   Array.from({ length: amount.value }, (_, pos) => {
-    createPromise(pos + 1, pause)
+    createPromise(pos + 1, (pause += stp))
       .then(({ pos, delay }) =>
         utils.success(`Fulfilled promise #${pos} in ${delay}ms`)
       )
       .catch(({ pos, delay }) =>
         utils.error(`Rejected promise #${pos} in ${delay}ms`)
       );
-
-    pause += Number(step.value);
   });
 });
 
