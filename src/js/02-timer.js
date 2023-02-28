@@ -7,8 +7,7 @@ const startBtn = document.querySelector('[data-start]');
 const dateInput = document.querySelector('#datetime-picker');
 const valueRefs = getTimerValueRefs('.timer > .field');
 
-let timerId;
-let countdownInterval;
+let timerId, countdownInterval;
 
 startBtn.disabled = true;
 startBtn.addEventListener('click', onStartClick);
